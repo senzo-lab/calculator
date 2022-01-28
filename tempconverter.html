@@ -1,0 +1,169 @@
+<html>
+<head>
+
+   <title>Temperature Conversion Calculator</title>
+
+<style>
+*{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+font-family: arial, helvetica;
+}
+
+body {
+width: 100%;
+}
+
+header {
+background-color: #c1c1c1;
+color: white;
+padding-left: 4rem;
+}
+header p {
+font-size: 3rem;
+padding: 1.5rem 0;
+}
+
+main{
+
+}
+
+.calculator{
+background-color: lightgray;
+max-width: 500px;
+margin: 3rem auto;
+border-radius: 8px;
+overflow: hidden;
+}
+
+.calc-header {
+background-color: orange;
+text-align: right;
+padding: .4rem 1rem .4rem 0;
+font-size: .9rem;
+font-weight: bold;
+}
+
+.calc-main {
+padding: 1rem;
+}
+
+form {
+display: grid;
+grid-template-columns: 1fr 4fr;
+grid-gap: 1rem;
+}
+
+form label {
+text-align: right;
+}
+
+form input, select {
+padding: .2rem;
+}
+
+form input[type=button] {
+grid-column-start: 2;
+max-width: 100px;
+margin-left: auto;
+padding: .7rem;
+background-color: lightgreen;
+color: white;
+border: none;
+}
+form input[type=button]:active {
+background-color: green;
+}
+
+.calc-footer{
+text-align: center;
+padding: 0.5rem 0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+    <header>
+<p>Header Goes Here</p>
+    </header>
+
+<main>
+
+<div class='calculator'>
+
+<div class='calc-header'>Temperature Converter</div>
+
+<div class='calc-main'>
+<form>
+
+<label><b>Conversion</b></label>
+<select name='conversion' onchange='updateConversion()'>
+<option value='ftoc'>Farenhuit to Celcius</option>
+<option value='ctof'>Celcius to Farenhuit</option>
+</select>
+
+<label>Celcius</label>
+<input type='text' name='celcius'/>
+
+<label>Farenhuit</label>
+<input type='text' name='farenhuit' disabled />
+
+<input type='button' value='Convert' onclick='convert()' />
+
+</form>
+</div>
+
+<hr/>
+<div class='calc-footer'>
+<i><small>The best converter! Copyright &copy 2022</small></i>
+</div>
+
+</div>
+
+<div class='calc-about'></div>
+<div class='calc-explain'></div>
+<div class='calc-history'></div>
+</main>
+
+<script>
+let conversion = 'ftoc';
+clearFields();
+
+function clearFields(){
+if(conversion === 'ftoc')
+{
+document.getElementsByName('celcius')[0].disabled = true;
+document.getElementsByName('farenhuit')[0].disabled = false;
+}
+if(conversion === 'ctof')
+{
+document.getElementsByName('celcius')[0].disabled = false;
+document.getElementsByName('farenhuit')[0].disabled = true;
+}
+}
+
+function updateConversion() {
+conversion = document.getElementsByName('conversion')[0].value;
+clearFields();
+}
+
+function convert() {
+if(conversion === 'ftoc')
+{
+let f = eval(document.getElementsByName('farenhuit')[0].value);
+document.getElementsByName('celcius')[0].value = Math.round((f - 32)*(5/9));
+}
+
+if(conversion === 'ctof')
+{
+let c = eval(document.getElementsByName('celcius')[0].value);
+document.getElementsByName('farenhuit')[0].value = Math.round(c*(9/5) + 32);
+}
+}
+</script>
+</body>
+</html>
